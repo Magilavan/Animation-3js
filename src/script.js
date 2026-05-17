@@ -31,7 +31,7 @@ renderer.setSize(sizes.width, sizes.height)
 renderer.render(scene, camera)
 
 //delta
- let time=Date.now()
+const clock = new THREE.Clock()
 
 
 //Animation
@@ -39,14 +39,13 @@ renderer.render(scene, camera)
 const tick =() =>{
 
     //time
-    const currenttime = Date.now()
-    const deltatime=currenttime-time
-    time=currenttime
-    console.log(deltatime)
-
-    //update
+   const elapsedTime = clock.getElapsedTime()
+   
+   camera.position.y=Math.sin(elapsedTime)
+   camera.position.x=Math.cos(elapsedTime)
+   camera.lookAt(mesh.position)
     
-    mesh.rotation.y +=0.001*deltatime
+    
 
 
     renderer.render(scene, camera)
